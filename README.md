@@ -35,6 +35,15 @@ $ kubectl get pods -o wide
 $ kubectl port-forward service/hello-minikube 7080:8080
 ```
 
+## Helm
+
+### Kafka Confluent
+```bash
+helm repo add confluentinc https://confluentinc.github.io/cp-helm-charts/   #(1)
+helm repo update    #(2)
+helm install confluentinc/cp-helm-charts --name my-confluent --version 0.6.0    #(3)
+```
+
 
 ## References
 - [Running Flask on Kubernetes](https://testdriven.io/blog/running-flask-on-kubernetes/)
