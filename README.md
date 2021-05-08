@@ -18,6 +18,10 @@ $ minikube config set memory 16384
 ```bash
 $ minikube start -p aged --kubernetes-version=v1.16.1
 ```
+Or just another cluster:
+```bash
+$ minikube start -p cluster2
+```
 
 ## Kubectl
 
@@ -30,3 +34,9 @@ $ kubectl get pods -o wide
 ```bash
 $ kubectl port-forward service/hello-minikube 7080:8080
 ```
+
+
+## References
+- [Running Flask on Kubernetes](https://testdriven.io/blog/running-flask-on-kubernetes/)
+- [Kubernetes API](https://kubernetes.io/docs/reference/kubernetes-api/)
+- [API Conventions](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#metadata)
