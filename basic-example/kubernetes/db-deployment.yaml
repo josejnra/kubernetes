@@ -21,13 +21,22 @@ spec:
             - containerPort: 3306
           env:
             - name: MYSQL_ROOT_PASSWORD
-              value: root
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: db-root-password
             - name: MYSQL_DATABASE
               value: example
             - name: MYSQL_USER
-              value: admin
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: db-user
             - name: MYSQL_PASSWORD
-              value: admin
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: db-user-password
           resources:
             limits:
               memory: 1G

@@ -16,7 +16,7 @@ config = {
 
 @app.route('/', methods=['GET'])
 def root():
-    return 'Running'
+    return f'Running at {os.uname()}'
 
 
 @app.route('/categories', methods=['GET'])

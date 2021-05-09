@@ -9,14 +9,14 @@ spec:
   selector:
     matchLabels:
       app: app
-  template:
+  template: # Pod Specification
     metadata:
       labels:
         app: app
     spec:
       containers:
         - name: container-my-app
-          image: josejnra/my-app:1.0
+          image: josejnra/my-app:1.2
           ports:
             - containerPort: 5000
           env:
