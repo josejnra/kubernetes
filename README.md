@@ -23,6 +23,12 @@ Or just another cluster:
 $ minikube start -p cluster2
 ```
 
+### LoadBalancer Service type
+In order to expose a service using the LoadBalancer type in minikube we got create a tunnel, by running:
+```bash
+$ minikube tunnel
+```
+
 ## Kubectl
 
 ### List pods with detailed informetion
