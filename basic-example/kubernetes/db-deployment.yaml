@@ -26,7 +26,10 @@ spec:
                   name: db-secrets
                   key: db-root-password
             - name: MYSQL_DATABASE
-              value: example
+              valueFrom:
+                configMapKeyRef:
+                  name: db-configmap
+                  key: db-database
             - name: MYSQL_USER
               valueFrom:
                 secretKeyRef:

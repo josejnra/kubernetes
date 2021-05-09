@@ -16,12 +16,30 @@ spec:
     spec:
       containers:
         - name: container-my-app
-          image: josejnra/my-app:1.2
+          image: josejnra/my-app:1.2.1
           ports:
             - containerPort: 5000
           env:
             - name: DB_HOST
-              value: app-db-service
+              valueFrom:
+                configMapKeyRef:
+                  name: db-configmap
+                  key: db-service
+            - name: DB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: db-configmap
+                  key: db-database
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: db-user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-secrets
+                  key: db-user-password
           resources:
             limits:
               memory: 1G

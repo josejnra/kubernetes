@@ -8,10 +8,10 @@ import mysql.connector
 app = Flask(__name__)
 
 config = {
-  'user': 'admin',
-  'password': 'admin',
   'host': os.getenv('DB_HOST', '127.0.0.1'),
-  'database': 'example'
+  'database': os.getenv('DB_DATABASE'),
+  'user': os.getenv('DB_USER'),
+  'password': os.getenv('DB_PASSWORD')
 }
 
 @app.route('/', methods=['GET'])
