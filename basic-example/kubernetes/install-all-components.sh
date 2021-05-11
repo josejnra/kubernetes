@@ -1,5 +1,8 @@
 #!/bin/bash
 
+kubectl apply -f db-persistent-volume.yaml
+kubectl apply -f db-persistent-volume-claim.yaml
+
 kubectl apply -f db-secret.yaml
 kubectl apply -f db-configmap.yaml
 

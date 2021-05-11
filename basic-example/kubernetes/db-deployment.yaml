@@ -40,7 +40,14 @@ spec:
                 secretKeyRef:
                   name: db-secrets
                   key: db-user-password
+          volumeMounts:
+            - name: db-volume-mount
+              mountPath: /var/lib/mysql
           resources:
             limits:
               memory: 1G
               cpu: "0.5"
+      volumes:
+        - name: db-volume-mount
+          persistentVolumeClaim:
+            claimName: db-pvc
