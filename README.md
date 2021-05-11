@@ -43,6 +43,12 @@ $ kubectl port-forward service/hello-minikube 7080:8080
 
 ## Helm
 
+### Prometheus
+```bash
+$ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+$ helm install prometheus--name-local prometheus-community/prometheus
+```
+
 ### Kafka Confluent
 ```bash
 helm repo add confluentinc https://confluentinc.github.io/cp-helm-charts/   #(1)
