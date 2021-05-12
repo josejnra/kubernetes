@@ -17,3 +17,25 @@ services:
       - 3000:3000
     depends_on:
       - prometheus
+
+  db:
+    image: josejnra/my-app-db:1.0
+    container_name: my-app-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=example
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+
+  my-app:
+    image: josejnra/my-app:1.2.2
+    container_name: my-app
+    ports:
+      - 5000:5000
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=example
+      - DB_USER=admin
+      - DB_PASSWORD=admin
+    depends_on:
+      - db
