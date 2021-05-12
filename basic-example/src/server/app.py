@@ -4,8 +4,18 @@ import json
 from flask import Flask
 import mysql.connector
 
+from prometheus_client import make_wsgi_app, Counter
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+
+counter_metric = Counter(name='my_app_request_counter',
+                         documentation='Request counter',
+                         labelnames=['method'])
 
 app = Flask(__name__)
+# Add prometheus wsgi middleware to route /metrics requests
+app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {
+    '/metrics': make_wsgi_app()
+})
 
 config = {
   'host': os.getenv('DB_HOST', '127.0.0.1'),
@@ -14,15 +24,18 @@ config = {
   'password': os.getenv('DB_PASSWORD')
 }
 
+
 @app.route('/', methods=['GET'])
-def root():
+def index():
+    counter_metric.labels(method='index').inc()
     return f'Running at {os.uname()}'
 
 
 @app.route('/categories', methods=['GET'])
 def products():
+    counter_metric.labels(method='products').inc()
     cnx = mysql.connector.connect(**config)
-    
+
     cursor = cnx.cursor()
     query = ("SELECT * FROM categories")
 

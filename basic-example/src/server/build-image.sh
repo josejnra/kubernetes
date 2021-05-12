@@ -1,5 +1,5 @@
 #!/bin/bash
 
-docker build -t josejnra/my-app:1.2.1 .
+docker build -t josejnra/my-app:1.2.2 .
 
-docker push josejnra/my-app:1.2.1
+docker push josejnra/my-app:1.2.2

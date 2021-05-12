@@ -4,6 +4,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.3
 MarkupSafe==1.1.1
 mysql-connector-python==8.0.24
+prometheus-client==0.10.1
 protobuf==3.16.0
 six==1.16.0
 Werkzeug==1.0.1
