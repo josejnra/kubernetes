@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: container-my-app
-          image: josejnra/my-app:1.2.1
+          image: josejnra/my-app:1.2.2
           ports:
             - containerPort: 5000
           env:
