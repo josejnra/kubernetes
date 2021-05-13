@@ -11,4 +11,4 @@ spec:
     - ReadWriteOnce
   storageClassName: standard
   hostPath:
-    path: "/home/jose/Projects/kubernetes/kubernetes/basic-example/kubernetes/pv"
+    path: "/home/jose/Projects/kubernetes/my-app/kubernetes/pv"
