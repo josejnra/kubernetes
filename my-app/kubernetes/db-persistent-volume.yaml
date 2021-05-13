@@ -6,9 +6,9 @@ metadata:
     type: local
 spec:
   capacity:
-    storage: 2Gi
+    storage: 1Gi
+  storageClassName: standard
   accessModes:
     - ReadWriteOnce
-  storageClassName: standard
   hostPath:
-    path: "/home/jose/Projects/kubernetes/my-app/kubernetes/pv"
+    path: /data/mysql
