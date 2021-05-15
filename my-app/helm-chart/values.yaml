@@ -1,0 +1,69 @@
+configMap:
+  # database name
+  dbDatabase: example
+
+secrets:
+  # secrets in order to acess dabata base
+  dbRootPassword: cm9vdA==
+  dbUser: YWRtaW4=
+  # echo -n 'field-value' | base64
+  dbUserPassword: YWRtaW4=
+
+dbPersistentVolume:
+  labels:
+    type: local
+  storageClassName: standard
+  # only accessed by the pod at the node
+  accessModes:
+    - ReadWriteOnce
+  # space reserved for database
+  capacity: 1Gi
+  # if running of docker, path on docker where to find the database data
+  hostPath: /data/mysql
+
+db:
+  # number of db replicas
+  replicas: 1
+  labels: 
+    app: my-app-db
+  
+  # base image
+  image: josejnra/my-app-db:1.0
+
+  container:
+    # which port to expose the dabatase
+    port: 3306
+    # database path
+    databasePath: /var/lib/mysql
+    resources:
+      limits:
+        memory: 1G
+        cpu: "0.5"
+
+  servicePort: 3306
+
+app:
+  # pods replicas
+  replicas: 1
+
+  labels: 
+    app: my-app
+
+  # base image
+  image: josejnra/my-app:1.2.2
+
+  container:
+    name: container-my-app
+    # which port to expose the app
+    port: 5000
+    # database path
+    databasePath: /var/lib/mysql
+    resources:
+      limits:
+        memory: 1G
+        cpu: "0.5"
+
+  servicePort: 80
+  serviceType: NodePort
+  serviceNodePort: 30000
+  serviceProtocol: TCP

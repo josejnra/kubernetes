@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-app-db-deployment
+  {{- if .Values.db.labels }}
+  labels:
+    {{- range $key, $value := .Values.db.labels }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.db.replicas }}
+  selector:
+    matchLabels:
+      {{- range $key, $value := .Values.db.labels }}
+      {{ $key }}: {{ $value | quote }}
+      {{- end }}
+  template:
+    metadata:
+      labels:
+        {{- range $key, $value := .Values.db.labels }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
+    spec:
+      containers:
+        - name: container-my-app-db
+          image: {{ .Values.db.image }}
+          ports:
+            - containerPort: {{ .Values.db.container.port }}
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-db-secrets
+                  key: dbRootPassword
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ .Release.Name }}-db-configmap
+                  key: dbDatabase
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-db-secrets
+                  key: dbUser
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-db-secrets
+                  key: dbUserPassword
+          volumeMounts:
+            - name: db-volume-mount
+              mountPath: {{ .Values.db.container.databasePath }}
+          resources:
+            limits:
+              memory: {{ required "Memory limit is required." .Values.db.container.resources.limits.memory }}
+              cpu: {{ required "CPU limit is required." .Values.db.container.resources.limits.cpu | quote }}
+      volumes:
+        - name: db-volume-mount
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-db-pvc

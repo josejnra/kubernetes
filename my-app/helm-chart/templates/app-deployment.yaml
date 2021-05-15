@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-app-deployment
+  labels:
+    {{- range $key, $value := .Values.app.labels }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  replicas: {{ .Values.app.replicas }}
+  selector:
+    matchLabels:
+      {{- range $key, $value := .Values.app.labels }}
+      {{ $key }}: {{ $value | quote }}
+      {{- end }}
+  template: # Pod Specification
+    metadata:
+      labels:
+        {{- range $key, $value := .Values.app.labels }}
+        {{ $key }}: {{ $value | quote }}
+        {{- end }}
+    spec:
+      containers:
+        - name: {{ .Values.app.container.name }}
+          image: {{ .Values.app.image }}
+          ports:
+            - containerPort: {{ .Values.app.container.port }}
+          env:
+            - name: DB_HOST
+              value: {{ .Release.Name }}-app-db-service
+            - name: DB_DATABASE
+              valueFrom:
+                configMapKeyRef: # ConfigMap
+                  name: {{ .Release.Name }}-db-configmap
+                  key: dbDatabase
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef: # Secret
+                  name: {{ .Release.Name }}-db-secrets
+                  key: dbUser
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef: # Secret
+                  name: {{ .Release.Name }}-db-secrets
+                  key: dbUserPassword
+          resources:
+            limits:
+              memory: {{ required "Memory limit is required." .Values.app.container.resources.limits.memory }}
+              cpu: {{ required "CPU limit is required." .Values.db.container.resources.limits.cpu | quote }}

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-db-pvc
+  {{- if .Values.dbPersistentVolume.labels }}
+  labels:
+    {{- range $key, $value := .Values.dbPersistentVolume.labels }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
+spec:
+  volumeName: {{ .Release.Name }}-db-pv
+  accessModes:
+    {{- range .Values.dbPersistentVolume.accessModes }}
+    - {{ . }}
+    {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.dbPersistentVolume.capacity }}
