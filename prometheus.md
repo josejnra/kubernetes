@@ -32,6 +32,12 @@ Most Prometheus components are written in Go, making them easy to build and depl
 - Nagios
 - Sensu
 
+## Some commands
+```bash
+$ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+$ helm install prometheus--name-local prometheus-community/prometheus
+```
+
 ## Referencies
 - https://www.dropbox.com/s/0l7kxhjqjbabtb0/prometheus%20site-ops%20preso.pdf?dl=0
 - https://prometheus.io/docs/introduction/overview/

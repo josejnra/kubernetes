@@ -70,10 +70,8 @@ $ helm install --debug --dry-run my-chart-release ./mychart
 ```
 
 ### Prometheus
-```bash
-$ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-$ helm install prometheus--name-local prometheus-community/prometheus
-```
+
+[Read this doc.](prometheus.md)
 
 ### Kafka Confluent
 ```bash
