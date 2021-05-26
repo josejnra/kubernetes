@@ -45,15 +45,37 @@ $ kubectl get pods -o wide
 $ kubectl port-forward service/hello-minikube 7080:8080
 ```
 
-### Helm
+### Rollback
+
+First of all, check history by running:
+```bash
+$ kubectl rollout history deployment.apps/my-app-release-app-deployment
+```
+
+In order to see detail on a specific revision:
+```bash
+$ kubectl rollout history deployment.apps/my-app-release-app-deployment --revision=1
+```
+
+Then, if you want to undo the current rollout and rollback to the previous revision: 
+```bash
+$ kubectl rollout undo deployment.apps/my-app-release-app-deployment
+```
+
+Alternatively, rollback to a specific revision:
+```bash
+$ kubectl rollout undo deployment.apps/my-app-release-app-deployment --to-revision=1
+```
+
+## Helm
 
 [Read this doc.](helm.md)
 
-### Prometheus
+## Prometheus
 
 [Read this doc.](prometheus.md)
 
-### Kafka Confluent
+## Kafka Confluent
 ```bash
 helm repo add confluentinc https://confluentinc.github.io/cp-helm-charts/   #(1)
 helm repo update    #(2)
