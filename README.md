@@ -28,6 +28,11 @@ In order to expose a service using the LoadBalancer type in minikube we got crea
 $ minikube tunnel
 ```
 
+### NodePort Access
+```bash
+$ minikube service --url <service-name>
+```
+
 ## Kubectl
 
 ### List pods with detailed informetion
