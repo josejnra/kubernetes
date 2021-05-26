@@ -1,8 +1,10 @@
 configMap:
+
   # database name
   dbDatabase: example
 
 secrets:
+
   # secrets in order to acess dabata base
   dbRootPassword: cm9vdA==
   dbUser: YWRtaW4=
@@ -10,6 +12,7 @@ secrets:
   dbUserPassword: YWRtaW4=
 
 dbPersistentVolume:
+
   labels:
     type: local
   storageClassName: standard
@@ -22,6 +25,7 @@ dbPersistentVolume:
   hostPath: /data/mysql
 
 db:
+
   # number of db replicas
   replicas: 1
   labels: 
@@ -43,6 +47,7 @@ db:
   servicePort: 3306
 
 app:
+
   # pods replicas
   replicas: 1
 
@@ -63,7 +68,7 @@ app:
         memory: 1G
         cpu: "0.5"
 
-  servicePort: 80
   serviceType: NodePort
+  servicePort: 80
   serviceNodePort: 30000
   serviceProtocol: TCP

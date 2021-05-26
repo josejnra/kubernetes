@@ -25,3 +25,13 @@ something like this:
 ```bash
 $ helm install --debug --dry-run my-chart-release ./mychart
 ```
+
+## Install
+```bash
+$ helm install my-app-release ./helm-chart
+```
+
+## Rollback
+```bash
+$ helm rollback my-app-release 1
+```
