@@ -33,9 +33,16 @@ Most Prometheus components are written in Go, making them easy to build and depl
 - Sensu
 
 ## Some commands
+Install prometheus using Helm chart.
+
 ```bash
 $ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 $ helm install prometheus--name-local prometheus-community/prometheus
+```
+
+### Dry run
+```bash
+helm install my-release --dry-run .
 ```
 
 ## Referencies
