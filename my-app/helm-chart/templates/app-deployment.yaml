@@ -20,7 +20,7 @@ spec:
         {{ $key }}: {{ $value | quote }}
         {{- end }}
       annotations:
-        prometheus.io/scrape: {{ .Values.app.isPrometheusExporterEnabled }}
+        prometheus.io/scrape: {{ .Values.app.isPrometheusExporterEnabled | quote }}
         prometheus.io/path: /metrics
         prometheus.io/port: {{ .Values.app.container.port | quote }}
     spec:
