@@ -22,7 +22,7 @@ fullnameOverride:
 ## ref: http://airflow.apache.org/docs/stable/executor/index.html
 ## valid values: ['SequentialExecutor', 'LocalExecutor', 'CeleryExecutor', 'KubernetesExecutor']
 ##
-executor: 'CeleryExecutor'
+executor: 'KubernetesExecutor'
 ## Name of an existing config map containing the Airflow config file
 ##
 configurationConfigMap:
@@ -688,7 +688,7 @@ ldap:
 rbac:
   ## Specifies whether RBAC rules should be created
   ##
-  create: false
+  create: true
 
 ## Pods Service Account
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
@@ -696,7 +696,7 @@ rbac:
 serviceAccount:
   ## Specifies whether a ServiceAccount should be created
   ##
-  create: false
+  create: true
   ## The name of the ServiceAccount to use.
   ## If not set and create is true, a name is generated using the airflow.fullname template
   # name:
@@ -907,7 +907,7 @@ externalDatabase:
 ## https://github.com/bitnami/charts/blob/master/bitnami/redis/values.yaml
 ##
 redis:
-  enabled: true
+  enabled: false
   ## Use password authentication
   ##
   auth:
