@@ -114,9 +114,15 @@ web:
   ## Add extra volume mounts
   ##
   extraVolumeMounts:
+    - name: requirements-volume
+      mountPath: /bitnami/python/requirements.txt
+      subPath: requirements.txt
   ## Add extra volumes
   ##
   extraVolumes:
+    - name: requirements-volume
+      configMap:
+        name: python-requirements
   ## Add extra environment variables
   ##
   extraEnvVars:
@@ -248,9 +254,15 @@ scheduler:
   ## Add extra volume mounts
   ##
   extraVolumeMounts:
+    - name: requirements-volume
+      mountPath: /bitnami/python/requirements.txt
+      subPath: requirements.txt
   ## Add extra volumes
   ##
   extraVolumes:
+    - name: requirements-volume
+      configMap:
+        name: python-requirements
   ## Add extra environment variables
   ##
   extraEnvVars:
@@ -375,9 +387,15 @@ worker:
   ## Add extra volume mounts
   ##
   extraVolumeMounts:
+    - name: requirements-volume
+      mountPath: /bitnami/python/requirements.txt
+      subPath: requirements.txt
   ## Add extra volumes
   ##
   extraVolumes:
+    - name: requirements-volume
+      configMap:
+        name: python-requirements
   ## Add extra environment variables
   ##
   extraEnvVars:
@@ -576,12 +594,12 @@ git:
   dags:
     ## Enable in order to download DAG files from git repositories.
     ##
-    enabled: false
+    enabled: true
     repositories:
-      - repository:
-        branch:
-        name:
-        path:
+      - repository: https://github.com/josejnra/some-dags.git
+        branch: main
+        name: dags
+        path: dags
   plugins:
     ## Enable in order to download Plugins files from git repositories.
     ##
