@@ -31,3 +31,20 @@ $ minikube tunnel
 ```bash
 $ minikube service --url <service-name>
 ```
+
+## Metrics Server
+Before enabling metrics-server make sure to set minikube profile:
+```bash
+$ minikube profile list
+$ minikube profile <profile-name>
+```
+
+Then:
+```bash
+$ minikube addons enable metrics-server
+```
+
+Now you may run:
+```bash
+$ kubectl top nodes
+```
