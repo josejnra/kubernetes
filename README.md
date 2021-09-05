@@ -54,6 +54,7 @@ $ kubectl rollout undo deployment.apps/my-app-release-app-deployment --to-revisi
 - [Kubevious](https://kubevious.io/): is open-source software that provides a usable and highly graphical interface for Kubernetes. Kubevious renders all configurations relevant to the application in one place.
 - [Kubelive](https://www.npmjs.com/package/kubelive): is a terminal-based UI using Node.js.
 - [K9s](https://k9scli.io/): provides a terminal UI to interact with your Kubernetes clusters.
+- [Stern](https://github.com/stern/stern)
 
 
 ## Kafka Confluent
