@@ -14,7 +14,7 @@ kind create cluster
 
 ## Create cluster from config file
 ```bash
-kind create cluster --name kind-cluster --config config.yaml
+kind create cluster --name cluster --config config.yaml
 ```
 
 ## Delete cluster
