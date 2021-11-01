@@ -49,7 +49,7 @@ db:
 app:
 
   # pods replicas
-  replicas: 1
+  replicas: 2
 
   labels: 
     app: my-app
@@ -67,6 +67,9 @@ app:
       limits:
         memory: 1G
         cpu: "0.5"
+    
+    # soft or hard
+    affinity: hard
 
   serviceType: NodePort
   servicePort: 80

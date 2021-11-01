@@ -24,6 +24,29 @@ spec:
         prometheus.io/path: /metrics
         prometheus.io/port: {{ .Values.app.container.port | quote }}
     spec:
+      affinity:
+        podAntiAffinity:
+        {{ if eq .Values.app.container.affinity "soft" }}
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                    - {{ .Values.app.labels.app }}
+                topologyKey: kubernetes.io/hostname
+        {{ else }}
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - {{ .Values.app.labels.app }}
+              topologyKey: kubernetes.io/hostname
+        {{ end }}
       containers:
         - name: {{ .Values.app.container.name }}
           image: {{ .Values.app.image }}
