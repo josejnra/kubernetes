@@ -1,5 +1,7 @@
 #!/bin/bash
 
+kubectl apply -f namespace-limit.yaml
+
 kubectl apply -f db-persistent-volume.yaml
 kubectl apply -f db-persistent-volume-claim.yaml
 
