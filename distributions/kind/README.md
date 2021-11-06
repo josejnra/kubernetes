@@ -4,7 +4,7 @@ Install kind by following the instructions described on this [link](https://kind
 
 ## Create cluster
 ```bash
-kind create cluster --name kind-cluster
+kind create cluster --name cluster
 ```
 
 ## Create cluster with multiple nodes
@@ -19,5 +19,5 @@ kind create cluster --name cluster --config config.yaml
 
 ## Delete cluster
 ```bash
-kind delete clusters kind-cluster
+kind delete clusters cluster
 ```

@@ -5,7 +5,7 @@ metadata:
   labels: 
     app: my-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: app
@@ -55,6 +55,9 @@ spec:
                   name: db-secrets
                   key: db-user-password
           resources:
+            requests:
+              memory: 64Mi
+              cpu: 200m
             limits:
-              memory: 1G
-              cpu: "0.5"
+              memory: 128Mi
+              cpu: 500m

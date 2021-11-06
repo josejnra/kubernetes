@@ -71,6 +71,9 @@ spec:
                   name: {{ .Release.Name }}-db-secrets
                   key: dbUserPassword
           resources:
+            requests:
+              memory: {{ required "Memory request is required." .Values.app.container.resources.requests.memory }}
+              cpu: {{ required "CPU request is required." .Values.app.container.resources.requests.cpu | quote }}
             limits:
               memory: {{ required "Memory limit is required." .Values.app.container.resources.limits.memory }}
               cpu: {{ required "CPU limit is required." .Values.db.container.resources.limits.cpu | quote }}

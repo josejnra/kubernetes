@@ -13,3 +13,4 @@ kubectl apply -f db-service.yaml
 
 kubectl apply -f app-deployment.yaml
 kubectl apply -f app-service.yaml
+kubectl apply -f app-hpa.yaml

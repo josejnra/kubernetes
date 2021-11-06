@@ -40,13 +40,18 @@ spec:
                 secretKeyRef:
                   name: db-secrets
                   key: db-user-password
+            - name: MYSQL_ROOT_HOST
+              value: 10.244.3.21  # hardcoded allowed address, should be % for example
           volumeMounts:
             - name: db-volume-mount
               mountPath: /var/lib/mysql
-          resources:
+          resources: 
+            requests:
+              memory: 64Mi
+              cpu: 100m
             limits:
-              memory: 1G
-              cpu: "0.5"
+              memory: 256Mi
+              cpu: 200m
       volumes:
         - name: db-volume-mount
           persistentVolumeClaim:

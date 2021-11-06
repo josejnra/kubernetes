@@ -40,16 +40,19 @@ db:
     # database path
     databasePath: /var/lib/mysql
     resources:
+      requests:
+        memory: 64Mi
+        cpu: 100m
       limits:
-        memory: 1G
-        cpu: "0.5"
+        memory: 256Mi
+        cpu: 200m
 
   servicePort: 3306
 
 app:
 
   # pods replicas
-  replicas: 2
+  replicas: 1
 
   labels: 
     app: my-app
@@ -64,10 +67,13 @@ app:
     # database path
     databasePath: /var/lib/mysql
     resources:
+      requests:
+        memory: 64Mi
+        cpu: 200m
       limits:
-        memory: 1G
-        cpu: "0.5"
-    
+        memory: 128Mi
+        cpu: 500m
+
     # soft or hard
     affinity: hard
 
