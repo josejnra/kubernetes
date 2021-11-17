@@ -7,7 +7,7 @@
 
 ## Kubectl
 
-## Generate deployment yaml
+### Generate deployment yaml
 ```shell
 kubectl create deployment my_deployment --image=busybox --dry-run=client --output=yaml
 ```
@@ -22,7 +22,7 @@ kubectl get pods -o wide
 kubectl port-forward service/hello-minikube 7080:8080
 ```
 
-### Rollback
+### Deployment rollback
 
 First of all, check history by running:
 ```shell
