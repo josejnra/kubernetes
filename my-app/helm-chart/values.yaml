@@ -26,6 +26,7 @@ dbPersistentVolume:
 
 db:
 
+  terminationGracePeriodSeconds: 3
   # number of db replicas
   replicas: 1
   labels: 
@@ -76,6 +77,12 @@ app:
 
     # soft or hard
     affinity: hard
+
+  hpa:
+    minReplicas: 2
+    maxReplicas: 5
+    cpu:
+      averageUtilization: 50
 
   serviceType: NodePort
   servicePort: 80

@@ -1,19 +1,21 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: app-db-deployment
-  labels: 
+  name: app-db-statefulset
+  labels:
     app: my-app-db
 spec:
+  serviceName: "app-db-service"
   replicas: 1
   selector:
     matchLabels:
-      app: app-db
+      app: app-db # has to match .spec.template.metadata.labels
   template:
     metadata:
       labels:
-        app: app-db
+        app: app-db # has to match .spec.selector.matchLabels
     spec:
+      terminationGracePeriodSeconds: 3
       containers:
         - name: container-my-app-db
           image: josejnra/my-app-db:1.0
@@ -45,7 +47,7 @@ spec:
           volumeMounts:
             - name: db-volume-mount
               mountPath: /var/lib/mysql
-          resources: 
+          resources:
             requests:
               memory: 64Mi
               cpu: 100m

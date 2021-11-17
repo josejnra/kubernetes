@@ -1,7 +1,7 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: {{ .Release.Name }}-app-db-deployment
+  name: {{ .Release.Name }}-app-db-statefulset
   {{- if .Values.db.labels }}
   labels:
     {{- range $key, $value := .Values.db.labels }}
@@ -9,6 +9,7 @@ metadata:
     {{- end }}
   {{- end }}
 spec:
+  serviceName: {{ .Release.Name }}-app-service
   replicas: {{ .Values.db.replicas }}
   selector:
     matchLabels:
@@ -22,6 +23,7 @@ spec:
         {{ $key }}: {{ $value | quote }}
         {{- end }}
     spec:
+      terminationGracePeriodSeconds: {{ .Values.db.terminationGracePeriodSeconds }}
       containers:
         - name: container-my-app-db
           image: {{ .Values.db.image }}
