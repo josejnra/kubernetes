@@ -88,6 +88,6 @@ app:
   servicePort: 80
   serviceNodePort: 30000
   serviceProtocol: TCP
-  
+
   # enable prometheus exporter
   isPrometheusExporterEnabled: true

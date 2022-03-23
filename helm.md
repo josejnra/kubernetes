@@ -35,3 +35,8 @@ $ helm install my-app-release ./helm-chart
 ```bash
 $ helm rollback my-app-release 1
 ```
+
+## Uninstall
+```bash
+$ helm uninstall my-app-release
+```
