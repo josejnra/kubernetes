@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: python-requirements
-data:
-  requirements.txt: |
-    --trusted-host pypi.org --truste-host pypi.python.org --truste-host=files.pythonhosted.org
-    haversine
